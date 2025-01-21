@@ -1,0 +1,25 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="211*"/>
+            <RowDefinition Height="224*"/>
+        </Grid.RowDefinitions>
+        <Grid HorizontalAlignment="Center" Height="223" VerticalAlignment="Center" Width="800" Grid.Row="3">
+            <Button x:Name="button1" Content="1" HorizontalAlignment="Left" Margin="650,0,0,0" VerticalAlignment="Top" Height="50" Width="75" RenderTransformOrigin="1.227,0.645" Click="Print_1" />
+            <Button x:Name="equal" Content="=" HorizontalAlignment="Left" Margin="725,200,0,0" VerticalAlignment="Top" Height="23" Width="75" RenderTransformOrigin="1.227,0.645" Click="Print_equal" />
+            <Button x:Name="sub" Content="-" HorizontalAlignment="Left" Margin="725,0,0,0" VerticalAlignment="Top" Height="50" Width="75" RenderTransformOrigin="1.227,0.645" Click="Print_minus" />
+            <Button x:Name="add" Content="+" HorizontalAlignment="Left" Margin="725,50,0,0" VerticalAlignment="Top" Height="50" Width="75" RenderTransformOrigin="1.227,0.645" Click="Print_plus" />
+            <Button x:Name="mul" Content="*" HorizontalAlignment="Left" Margin="725,100,0,0" VerticalAlignment="Top" Height="50" Width="75" RenderTransformOrigin="1.227,0.645" Click="Print_star" />
+            <Button x:Name="div" Content="/" HorizontalAlignment="Left" Margin="725,150,0,0" VerticalAlignment="Top" Height="50" Width="75" RenderTransformOrigin="1.227,0.645" Click="Print_slash" />
+        </Grid>
+        <TextBox x:Name="textbox1" HorizontalAlignment="Right" Height="206" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="800" FontSize="50" TextAlignment="Right" VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged"/>
+
+    </Grid>
+</Window>
