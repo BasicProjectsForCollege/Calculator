@@ -7,10 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="600" ResizeMode="NoResize">
     <Window.Resources>
-        <Style TargetType="Button" >
+        <Style TargetType="Button">
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="Background" Value="White"/>
             <Setter Property="BorderThickness" Value="0.1"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value=" 50"/>
         </Style>
     </Window.Resources>
 
@@ -25,22 +27,22 @@
         <Button Tag="106" x:Name="per" Content="%" HorizontalAlignment="Left" Margin="490,215,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_Arthermatic_op"/>
 
         <Button Tag="107" x:Name="bracket" Content="()" HorizontalAlignment="Left" Margin="440,215,0,0" VerticalAlignment="Top" Height="50" Width="50"/>
-        <Button Tag="108" x:Name="clr" Content="Clr" HorizontalAlignment="Left" Margin="390,215,0,0" VerticalAlignment="Top" Height="50" Width="50"/>
+        <Button Tag="108" x:Name="clr" Content="Clr" HorizontalAlignment="Left" Margin="390,215,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_Arthermatic_op"/>
 
         <!--Numbers-->
-        <Button Tag="9" Content="9" HorizontalAlignment="Left" Margin="490,265,0,0" VerticalAlignment="Top" Height="50" Width="50" />
-        <Button Tag="6" Content="6" HorizontalAlignment="Left" Margin="490,315,0,0" VerticalAlignment="Top" Height="50" Width="50" />
-        <Button Tag="3" Content="3" HorizontalAlignment="Left" Margin="490,365,0,0" VerticalAlignment="Top" Height="50" Width="50" />
-        <Button Tag="8" Content="8" HorizontalAlignment="Left" Margin="440,265,0,0" VerticalAlignment="Top" Height="50" Width="50" />
-        <Button Tag="5" Content="5" HorizontalAlignment="Left" Margin="440,315,0,0" VerticalAlignment="Top" Height="50" Width="50" />
-        <Button Tag="2" Content="2" HorizontalAlignment="Left" Margin="440,365,0,0" VerticalAlignment="Top" Height="50" Width="50" />
-        <Button Tag="7" Content="7" HorizontalAlignment="Left" Margin="390,265,0,0" VerticalAlignment="Top" Height="50" Width="50" />
-        <Button Tag="4" Content="4" HorizontalAlignment="Left" Margin="390,315,0,0" VerticalAlignment="Top" Height="50" Width="50" />
-        <Button Tag="1" Content="1" HorizontalAlignment="Left" Margin="390,365,0,0" VerticalAlignment="Top" Height="50" Width="50" />
-        <Button Tag="0" Content="0" HorizontalAlignment="Left" Margin="440,415,0,0" VerticalAlignment="Top" Height="50" Width="50" />
+        <Button Tag="9" x:Name="num9" Content="9" HorizontalAlignment="Left" Margin="490,265,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_digits"/>
+        <Button Tag="6" x:Name="num6" Content="6" HorizontalAlignment="Left" Margin="490,315,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_digits"/>
+        <Button Tag="3" x:Name="num3" Content="3" HorizontalAlignment="Left" Margin="490,365,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_digits"/>
+        <Button Tag="8" x:Name="num8" Content="8" HorizontalAlignment="Left" Margin="440,265,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_digits"/>
+        <Button Tag="5" x:Name="num5" Content="5" HorizontalAlignment="Left" Margin="440,315,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_digits"/>
+        <Button Tag="2" x:Name="num2" Content="2" HorizontalAlignment="Left" Margin="440,365,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_digits"/>
+        <Button Tag="7" x:Name="num7" Content="7" HorizontalAlignment="Left" Margin="390,265,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_digits"/>
+        <Button Tag="4" x:Name="num4" Content="4" HorizontalAlignment="Left" Margin="390,315,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_digits"/>
+        <Button Tag="1" x:Name="num1" Content="1" HorizontalAlignment="Left" Margin="390,365,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_digits"/>
+        <Button Tag="0" x:Name="num0" Content="0" HorizontalAlignment="Left" Margin="440,415,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_digits"/>
         <!--Extra Arthematic-->
-        <Button Tag="11" Content="+/-" HorizontalAlignment="Left" Margin="390,415,0,0" VerticalAlignment="Top" Height="50" Width="50"/>
-        <Button Tag="12" Content="." HorizontalAlignment="Left" Margin="490,415,0,0" VerticalAlignment="Top" Height="50" Width="50"/>
+        <Button Tag="10" Content="+/-" HorizontalAlignment="Left" Margin="390,415,0,0" VerticalAlignment="Top" Height="50" Width="50"/>
+        <Button Tag="11" Content="." HorizontalAlignment="Left" Margin="490,415,0,0" VerticalAlignment="Top" Height="50" Width="50"/>
         <TextBox x:Name="textbox1" HorizontalAlignment="Left" Height="200" TextWrapping="Wrap" Text="" VerticalAlignment="Top" 
                  Width="500" FontSize="50" TextAlignment="Right" VerticalContentAlignment="Bottom"
                  BorderThickness="0.1" Margin="90,5,0,0" >
