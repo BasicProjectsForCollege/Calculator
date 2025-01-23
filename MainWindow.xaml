@@ -5,21 +5,49 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="600" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="Button" >
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="0.1"/>
+        </Style>
+    </Window.Resources>
+
+
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="211*"/>
-            <RowDefinition Height="224*"/>
-        </Grid.RowDefinitions>
-        <Grid HorizontalAlignment="Center" Height="223" VerticalAlignment="Center" Width="800" Grid.Row="3">
-            <Button x:Name="button1" Content="1" HorizontalAlignment="Left" Margin="650,0,0,0" VerticalAlignment="Top" Height="50" Width="75" RenderTransformOrigin="1.227,0.645" Click="Print_1" />
-            <Button x:Name="equal" Content="=" HorizontalAlignment="Left" Margin="725,200,0,0" VerticalAlignment="Top" Height="23" Width="75" RenderTransformOrigin="1.227,0.645" Click="Print_equal" />
-            <Button x:Name="sub" Content="-" HorizontalAlignment="Left" Margin="725,0,0,0" VerticalAlignment="Top" Height="50" Width="75" RenderTransformOrigin="1.227,0.645" Click="Print_minus" />
-            <Button x:Name="add" Content="+" HorizontalAlignment="Left" Margin="725,50,0,0" VerticalAlignment="Top" Height="50" Width="75" RenderTransformOrigin="1.227,0.645" Click="Print_plus" />
-            <Button x:Name="mul" Content="*" HorizontalAlignment="Left" Margin="725,100,0,0" VerticalAlignment="Top" Height="50" Width="75" RenderTransformOrigin="1.227,0.645" Click="Print_star" />
-            <Button x:Name="div" Content="/" HorizontalAlignment="Left" Margin="725,150,0,0" VerticalAlignment="Top" Height="50" Width="75" RenderTransformOrigin="1.227,0.645" Click="Print_slash" />
-        </Grid>
-        <TextBox x:Name="textbox1" HorizontalAlignment="Right" Height="206" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="800" FontSize="50" TextAlignment="Right" VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged"/>
+        <!--Arthematic Functions -->
+        <Button Tag="101" x:Name="equal" Content="=" HorizontalAlignment="Left" Margin="540,415,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_Arthermatic_op"/>
+        <Button Tag="103" x:Name="add" Content="+" HorizontalAlignment="Left" Margin="540,365,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_Arthermatic_op"/>
+        <Button Tag="102" x:Name="sub" Content="-" HorizontalAlignment="Left" Margin="540,315,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_Arthermatic_op"/>
+        <Button Tag="104" x:Name="mul" Content="*" HorizontalAlignment="Left" Margin="540,265,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_Arthermatic_op"/>
+        <Button Tag="105" x:Name="div" Content="/" HorizontalAlignment="Left" Margin="540,215,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_Arthermatic_op"/>
+        <Button Tag="106" x:Name="per" Content="%" HorizontalAlignment="Left" Margin="490,215,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_Arthermatic_op"/>
+
+        <Button Tag="107" x:Name="bracket" Content="()" HorizontalAlignment="Left" Margin="440,215,0,0" VerticalAlignment="Top" Height="50" Width="50"/>
+        <Button Tag="108" x:Name="clr" Content="Clr" HorizontalAlignment="Left" Margin="390,215,0,0" VerticalAlignment="Top" Height="50" Width="50"/>
+
+        <!--Numbers-->
+        <Button Tag="9" Content="9" HorizontalAlignment="Left" Margin="490,265,0,0" VerticalAlignment="Top" Height="50" Width="50" />
+        <Button Tag="6" Content="6" HorizontalAlignment="Left" Margin="490,315,0,0" VerticalAlignment="Top" Height="50" Width="50" />
+        <Button Tag="3" Content="3" HorizontalAlignment="Left" Margin="490,365,0,0" VerticalAlignment="Top" Height="50" Width="50" />
+        <Button Tag="8" Content="8" HorizontalAlignment="Left" Margin="440,265,0,0" VerticalAlignment="Top" Height="50" Width="50" />
+        <Button Tag="5" Content="5" HorizontalAlignment="Left" Margin="440,315,0,0" VerticalAlignment="Top" Height="50" Width="50" />
+        <Button Tag="2" Content="2" HorizontalAlignment="Left" Margin="440,365,0,0" VerticalAlignment="Top" Height="50" Width="50" />
+        <Button Tag="7" Content="7" HorizontalAlignment="Left" Margin="390,265,0,0" VerticalAlignment="Top" Height="50" Width="50" />
+        <Button Tag="4" Content="4" HorizontalAlignment="Left" Margin="390,315,0,0" VerticalAlignment="Top" Height="50" Width="50" />
+        <Button Tag="1" Content="1" HorizontalAlignment="Left" Margin="390,365,0,0" VerticalAlignment="Top" Height="50" Width="50" />
+        <Button Tag="0" Content="0" HorizontalAlignment="Left" Margin="440,415,0,0" VerticalAlignment="Top" Height="50" Width="50" />
+        <!--Extra Arthematic-->
+        <Button Tag="11" Content="+/-" HorizontalAlignment="Left" Margin="390,415,0,0" VerticalAlignment="Top" Height="50" Width="50"/>
+        <Button Tag="12" Content="." HorizontalAlignment="Left" Margin="490,415,0,0" VerticalAlignment="Top" Height="50" Width="50"/>
+        <TextBox x:Name="textbox1" HorizontalAlignment="Left" Height="200" TextWrapping="Wrap" Text="" VerticalAlignment="Top" 
+                 Width="500" FontSize="50" TextAlignment="Right" VerticalContentAlignment="Bottom"
+                 BorderThickness="0.1" Margin="90,5,0,0" >
+
+        </TextBox>
+        <Line X1="0" Y1="-27" X2="600" Y2="-27" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1" ></Line>
 
     </Grid>
+
 </Window>
