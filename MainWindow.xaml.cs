@@ -94,6 +94,15 @@ namespace WpfApp1
                     {
                         break;
                     }
+                case 11:
+                    {
+                        if(textbox1.Text == "")
+                        {
+                            textbox1.Text = "0";
+                        }
+                        textbox1.Text += dot.Content.ToString();
+                        break;
+                    }
 
             }
 
@@ -159,23 +168,65 @@ namespace WpfApp1
         
         private void evaluate(String a)
         {
-            int size = a.Length,c=0;
             List<string> val = new List<string>();
-            List<char> op = new List<char>();
-            List<char> val1 = new List<char>();
-            for (int i =0; i<size; i++)
+            List<char> op = new List<char>(), pro = new List<char>();
+            pro = ['*','/','+','-'];
+            int i = 0;
+            string tmp="";
+            int size = a.Length;
+            while (i < size)
             {
-                if (a[i]<47 && a[i] >58)
+
+                if (a[i]>45 && a[i] < 59 && a[i] !=47 && i<size)
                 {
-                    
-                    op.Add(a[i]);
+                    tmp = tmp + a[i];
+                    if (i == size - 1)
+                    {
+                        val.Add(tmp);
+                        break;
+                    }
                 }
                 else
+                {   
+                    val.Add(tmp);
+                    op.Add(a[i]);
+                    tmp = "";
+                }
+                i++;
+            }
+            float ans = float.Parse(val[0]), size_op = op.Count ;
+            for ( i = 0; i < size_op; i++)
+            {
+                
+                switch (op[i])
                 {
-                    val1.Add(a[i]);
+                    case '+':
+                    {
+                            ans += float.Parse(val[i + 1]);
+                            break;
+                    }
+                    case '-':
+                    {
+                            ans -=  float.Parse(val[i + 1]);
+                            break;
+                    }
+                    case '*':
+                        {
+                            ans *= float.Parse(val[i + 1]);
+                            break;
+                        }
+                    case'/':
+                    {       
+                            ans /=  float.Parse(val[i + 1]);
+                            
+                            break;
+                    }
+
                 }
             }
-            MessageBox.Show(val[0]);
+            textbox1.Text = ans.ToString();
+
+           
         }
 
         

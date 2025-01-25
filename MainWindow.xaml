@@ -41,8 +41,8 @@
         <Button Tag="1" x:Name="num1" Content="1" HorizontalAlignment="Left" Margin="390,365,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_digits"/>
         <Button Tag="0" x:Name="num0" Content="0" HorizontalAlignment="Left" Margin="440,415,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_digits"/>
         <!--Extra Arthematic-->
-        <Button Tag="10" Content="+/-" HorizontalAlignment="Left" Margin="390,415,0,0" VerticalAlignment="Top" Height="50" Width="50"/>
-        <Button Tag="11" Content="." HorizontalAlignment="Left" Margin="490,415,0,0" VerticalAlignment="Top" Height="50" Width="50"/>
+        <Button Tag="10" Content="+/-" HorizontalAlignment="Left" Margin="390,415,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_digits"/>
+        <Button Tag="11" x:Name="dot" Content="." HorizontalAlignment="Left" Margin="490,415,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_digits"/>
         <TextBox x:Name="textbox1" HorizontalAlignment="Left" Height="200" TextWrapping="Wrap" Text="" VerticalAlignment="Top" 
                  Width="500" FontSize="50" TextAlignment="Right" VerticalContentAlignment="Bottom"
                  BorderThickness="0.1" Margin="90,5,0,0" >
