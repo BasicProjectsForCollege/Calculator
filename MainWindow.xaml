@@ -43,9 +43,13 @@
         <!--Extra Arthematic-->
         <Button Tag="10" Content="+/-" HorizontalAlignment="Left" Margin="390,415,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_digits"/>
         <Button Tag="11" x:Name="dot" Content="." HorizontalAlignment="Left" Margin="490,415,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_digits"/>
+        
+        <!--Trignometric-->
+        <Button Tag="sin" x:Name="sine" Content="sin" HorizontalAlignment="Left" Margin="340,265,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_Trig"/>
+        
         <TextBox x:Name="textbox1" HorizontalAlignment="Left" Height="200" TextWrapping="Wrap" Text="" VerticalAlignment="Top" 
                  Width="500" FontSize="50" TextAlignment="Right" VerticalContentAlignment="Bottom"
-                 BorderThickness="0.1" Margin="90,5,0,0" >
+                 BorderThickness="0.1" Margin="80,5,0,0" >
 
         </TextBox>
         <Line X1="0" Y1="-27" X2="600" Y2="-27" VerticalAlignment="Center" Stroke="Black" StrokeThickness="1" ></Line>
