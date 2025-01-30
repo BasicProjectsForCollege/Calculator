@@ -15,6 +15,7 @@ using System.Text.Json;
 using System.Windows.Media.TextFormatting;
 using System.Numerics;
 using System.Drawing;
+using System.Security.Policy;
 
 namespace WpfApp1
 {
@@ -23,7 +24,7 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
-        string ans = "\0";
+        
         int val;
         public MainWindow()
         {
@@ -120,12 +121,12 @@ namespace WpfApp1
                 tag = button.Tag?.ToString();
             }
             int a = Int32.Parse(tag);
+            float ans;
             switch (a) {
                 case 101:
                     {
                         
-                        text = add_brac(text);
-                        float ans = evaluate(text);
+                        ans =evaluate(text);
                         textbox1.Text = ans.ToString();
                         break;
                     }
@@ -203,32 +204,28 @@ namespace WpfApp1
         }
 
         //arthematic funtion
-        private float arthematic(float prev, float next, char op)
+        private float arthematic(float prev,float next, char op)
         {
-            float res = 0;
+            
             switch (op) {
                 case '+': {
-                        res = prev + next;
-                        break;
+                        return prev + next;
                     }
                 case '-':
                     {
-                        res = prev - next;
-                        break;
+                        return prev - next;
                     }
                 case '*':
                     {
-                        res = prev * next;
-                        break;
+                        return prev * next;
                     }
                 case '/':
                     {
-                        res = prev / next;
-                        break;
+                        return prev / next;
                     }
 
             }
-            return res;
+            return 0;
 
         }
         private int Precedence1(char op)
@@ -239,338 +236,122 @@ namespace WpfApp1
         }
         private string add_brac(String a)
         {
-            int size=a.Length;
-            a.Insert(0, "(");
-            a.Insert(size, ")");
+            /*int size = a.Count();            
+            a = a.Insert(0, "(");
+            a = a.Insert(size + 1, ")");
             int i = 0;
             int c = 0;
             size = a.Length;
             for (i = 0; i < size; i++)
             {
-                if (a[i + c] == '+' || a[i + c] == '-')
+                if (a[i + c] == '+' || a[i + c] == '-' )
                 {
                     a = a.Insert(i + c + 1, "(");
                     a = a.Insert(i + c, ")");
                     c = c + 2;
                 }
-            }
-            return a;
+            }*/
+            return  "("+a+")";
+            
         }
         
 
 
-        //evaluation 1st attempt
-        /* private void evaluate(String a)
-         {
-             List<string> val = new List<string>();
-             List<char> op = new List<char>(), pro = new List<char>();
-             List<int> pos = new List<int>();
-             pro = ['*','/','+','-'];
-             int i = 0;
-             string tmp="";
-             int size = a.Length;
-             while (i < size)
-             {
-
-                 if (a[i]>45 && a[i] < 59 && a[i] !=47 && i<size)
-                 {
-                     tmp = tmp + a[i];
-                     if (i == size - 1)
-                     {
-                         val.Add(tmp);
-                         break;
-                     }
-                 }
-                 else
-                 {   
-                     val.Add(tmp);
-                     op.Add(a[i]);
-                     Check_op(a[i], pos);
-                     tmp = "";
-                 }
-                 i++;
-             }
-             float ans = 0, size_op = op.Count;
-
-
-             string tmp1="";
-
-             ans = float.Parse(val[0]);
-             for ( i = 0; i < size_op; i++)
-             {
-
-                     switch (op[i])
-                 {
-                     case '+':
-                     {
-                             ans += float.Parse(val[i + 1]);
-                             break;
-                     }
-                     case '-':
-                     {
-                             ans -=  float.Parse(val[i + 1]);
-                             break;
-                     }
-                     case '*':
-                         {
-                             ans *= float.Parse(val[i + 1]);
-                             break;
-                         }
-                     case'/':
-                     {       
-                             ans /=  float.Parse(val[i + 1]);
-
-                             break;
-                     }
-
-                 }
-             }
-
-             for(i =0; i<val.Count; i++)
-             {
-                 tmp1 = tmp1 + val[i] + " ";
-
-             }
-             MessageBox.Show(tmp1);
-             textbox1.Text = ans.ToString();
-
-
-         }
-       
         
-        //evalution 2 attempt
-        //test case 1 + 2*3 - 4*5
-        by priority do * or / first
-          so string becomes 1 + 6 - 20 
-          */
-
-
-        //evaluation 2nd attempt 
-        /*private void evaluate(String a)
+        //evalution 5th attempt
+        private float evaluate(String a)
         {
+            //(1+(2*3))
+            Stack<float> val = new Stack<float>();
+            Stack<char> op = new Stack<char>();
 
+            bool Isdec = false;
 
-            bool start = true, end = false;
-            string s = "";
-            int i = 0, size_string = a.Count();
-            s = "";
+            float number = 0,decimal_pointer=1;
 
+            int size = a.Length;
 
-            a = a.Insert(0, "(");
-            a = a.Insert(size_string + 1, ")");
-            int c = 0;
-
-            for (i = 0; i < size_string; i++)
+            for (int i = 0; i < size; i++)
             {
-                if (a[i + c] == '+' || a[i + c] == '-')
-                {
-                    a = a.Insert(i + c + 1, "(");
-                    a = a.Insert(i + c, ")");
-                    c = c + 2;
-                }
+                if (char.IsWhiteSpace(a[i])) continue; //checks for whitespaces
 
-            }
-            size_string = a.Count();
-            string val1 = "",op="";
-
-            int c1 = 0;
-            float tmp = 1, sum = 0;
-            
-            i = 0;
-
-
-
-            while (i < size_string)
-            {
+                //if it encounters '('
                 if (a[i] == '(')
                 {
-                    start = true;
-                    end = false;
-                    i++;
+                    op.Push('('); // pushes it top of op stack
                 }
-                else if (a[i] == ')')
+                else if (a[i] == ')') //if it encounters ')' 
                 {
-
-                    start = false;
-                    end = true;
-                    
-
-                }
-                
-
-                //inserting number in val1
-                if (a[i] > 45 && a[i] < 59 && a[i] != 47 && end == false)
-                {
-                    
-                    val1 = val1.Insert(c1, a[i].ToString());
-                    c1++;
-
-                }
-                //checking if a[i] is '/' or '*' ignores '+' and '-'
-                if (a[i] < 45 || end == true)
-                {
-
-                    c1 = 0;
-                    if (val1 != "")
+                   //evaluates whats in between the brackets if the top of op stack is '('
+                    while (op.Count > 0 && (op.Peek() !='('))
                     {
-                        if (a[i] == '*')
-                        {
-                            op = "*";
-                            tmp *= float.Parse(val1);
-                        }
-                        else if (a[i] == '/')
-                        {
-                            op = "/";
-                            tmp /= float.Parse(val1);
-                        }
-
-                    }
-                    
-                    val1 = "";
-                }
-                
-
-                
-                //adding or subtracting previous
-                switch (a[i].ToString())
-                {
-                    case "+":
-                        {
-                            sum += tmp;
-                            tmp = 1;
-                            op = "+";
-                            break;
-                        }
-                    case "-":
-                        {
-                            sum -= tmp;
-                            tmp = 1;
-                            op = "-";
-                            break;
-                        }
-                    default:
-                        {
-
-                            break;
-                        }
-
-
-                }
-
-                //MessageBox.Show(val1);
-               
-                if (i == size_string - 1 && end == true)
-                {
-                    if (op == "+")
-                    {
-                        sum += tmp;
-                    }
-                    else if (op == "-")
-                    {
-                        sum -= tmp;
-                    }
-                    
-
-                }
-                i++;
-            }
-
-
-            textbox1.Text = sum.ToString();
-
-            
-        }*/
-
-        //evalutaion 3rd attempt
-        /*private float evaluate(String a)
-        {
-            Stack<char> op = new Stack<char>();
-            Stack<float> val = new Stack<float>();
-            float number=1;
-            int i = 0;
-            int size = a.Length;
-            
-            a = a.Insert(0, "(");
-            a = a.Insert(size + 1, ")");
-            ;
-            int c = 0;
-            size = a.Length;
-            for ( i = 0; i < size; i++)
-            {
-                if (a[i + c] == '+' || a[i + c] == '-')
-                {
-                    a = a.Insert(i + c + 1, "(");
-                    a = a.Insert(i + c, ")");
-                    c = c + 2;
-                }
-            }
-            //input values with decimal if required 
-            i = 0;
-            float sum = 0;
-            string tmp = "";
-            for( i =0; i<size; i++)
-            {
-                
-                if (char.IsDigit(a[i]))
-                {
-                    number = 0;
-                    while (i<size && (char.IsDigit(a[i])|| a[i] == '.'))
-                    {
-                        if (a[i] == '.')
-                        {
-                            i++;
-                            float decimal_part = 0;
-                            while (i<size && char.IsDigit(a[i])){
-                                decimal_part += (a[i] - '0')/10;
-
-                            }
-                            number += decimal_part;
-                            break;
-                        }else
-                        {
-                            number = number * 10 + (a[i] - '0');
-                            i++;
-                        }
-                    }
-                    i--;
-                    val.Push(number);
-                }
-                else if (a[i] =='(')
-                {
-                    op.Push('(');
-                }else if (a[i] == ')')
-                {
-                    while (op.Peek() != '(')
-                    {
-                        val.Push(arthematic(val.Pop(), val.Pop(), op.Pop()));
+                        float r = val.Pop();
+                        float s = val.Pop();
+                        val.Push(arthematic(s, r, op.Pop()));
                     }
                     op.Pop();
                 }
-                else if (a[i] =='+' || a[i]=='/' || a[i] == '*' || a[i] == '-')
+                else if (char.IsDigit(a[i]))//if encounters digit it pushes it to top
                 {
-                    while(op.Count()>0 && Precedence(op.Peek()) >= Precedence(a[i])){
-                        val.Push(arthematic(val.Pop(), val.Pop(), op.Pop()));
+                   
+                    number = 0;
+                    Isdec = false;
+                    decimal_pointer = 1;
+                    while (i < size && (char.IsDigit(a[i]) || a[i] == '.'))//if any decimal no.
+                    {
+
+                        if (a[i] == '.')//evlautaion after deciaml point
+                        {
+                            if(Isdec){
+                                break;
+                            }
+                            Isdec = true;
+                                i++;
+                            continue;
+                        }
+                        if (Isdec) 
+                        {
+                            decimal_pointer *= 10;
+                            number +=(a[i] - '0')/decimal_pointer;
+                        }
+                        else{ //evlatuion before decimal point
+                            number = number * 10 + (a[i] - '0');
+                        }
+
+                        i++;
+                    }
+
+                    i--;
+                    val.Push(number);//pushes no. when done 
+                }
+                else //pushes encountered operator in op stack checking the priority 
+                {
+                    while (op.Count > 0 && Precedence1(op.Peek()) >= Precedence1(a[i]))
+                    {
+                        float r = val.Pop();
+                        float s = val.Pop();
+                        val.Push(arthematic(s, r, op.Pop()));
                     }
                     op.Push(a[i]);
+
                 }
+                
+
             }
-            while (op.Count>0)
+            //evalutes remaining operators outside the bracket
+            while (op.Count >0)
             {
-                val.Push(arthematic(val.Pop(), val.Pop(), op.Pop()));
+                float r = val.Pop();
+                float s = val.Pop();
+                val.Push(arthematic(s, r, op.Pop()));
             }
-            return val.Pop();
-        }*/
 
-        //evalution 4th attempt 
-        private int evaluate(String a)
-        {
-
-
-
-            return 0;
+            return val.Pop(); //only answers remains in the val stack
         }
 
     }
 
 
 }
+
+    
