@@ -28,7 +28,7 @@
 
         <Button Tag="107" x:Name="bracket" Content="()" HorizontalAlignment="Left" Margin="440,215,0,0" VerticalAlignment="Top" Height="50" Width="50"/>
         <Button Tag="108" x:Name="clr" Content="Clr" HorizontalAlignment="Left" Margin="390,215,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_Arthermatic_op"/>
-
+        <Button Tag="109" x:Name="fact" Content="x!" HorizontalAlignment="Left" Margin="340,415,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_Arthermatic_op"/>
         <!--Numbers-->
         <Button Tag="9" x:Name="num9" Content="9" HorizontalAlignment="Left" Margin="490,265,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_digits"/>
         <Button Tag="6" x:Name="num6" Content="6" HorizontalAlignment="Left" Margin="490,315,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="Print_digits"/>
