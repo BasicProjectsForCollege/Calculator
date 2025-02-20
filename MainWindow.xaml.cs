@@ -248,63 +248,63 @@ namespace WpfApp1
 
 
         }
-        private double trignometery(double a, string op)
+        private double atan(double a)
         {
-            if (a > 180 && a<360)
+            double x = 1, y = a;
+            double finalangle = 0;
+            double x1, y1;
+            for(int i =0; i<20; i++)
             {
-                a = 180 - a;
-            }else if (a >= 360)
-            {
-                while (a > 0)
-                {
-                    a =a-360;
-                }               
+                int d = y > 0 ? -1 : 1;
+                x1 = x - d * y / (1 << i);
+                y1 = y + d * x / (1 << i);
+                if (d < 0) finalangle +=jumptable[i];
+                else finalangle -=jumptable[i];
+                x = x1;
+                y = y1;
+
+
             }
-  
+            return finalangle;
+        }
+        
+        private double inverse_trig(double a, string op)
+        {
+            int d = 1;
             switch (op) {
-
-                case "sin":
+                case "atan":
                     {
-                        a = a * pi * 0.005555;
-                        double res = (a - (expontential(a, 3) * (0.1666667)) + (expontential(a, 5) * (0.0083333)) - (expontential(a, 7) * 0.0001984));
-                        return res;
-
+                        return atan(a);
                     }
-                case "cos":
+                case "asin": {
+                        if (a == 1) return Math.PI/2;
+                        else if (a == -1) return -Math.PI/2;
+
+                        if (a < 1 || a > -1)
+                        {   
+                            return d*atan(a / expontential(1 - a * a, 0.5));
+                        }
+                        break;
+                    }
+                case "acos":
                     {
-                        a = a * pi * 0.005555;
-                        double res = (1 - (expontential(a, 2) * 0.5) + (expontential(a, 4) * 0.0416667) - (expontential(a, 6) * 0.0013889));
-                        return res;
+                        if (a == 1) return 0;
+                        else if (a == -1) return Math.PI;
 
+                        if (a < 1 || a > -1)
+                        {       
+                                return Math.PI / 2 - atan(a / expontential(1 - a * a, 0.5));
+                        }
+                        break;
                     }
-                case "tan":
+                default:
                     {
-                        a = a * pi * 0.005555;
-                        double res = (a + expontential(a, 3) * 0.3333334 + expontential(a, 5) * 0.1333334);
-                        return res;
-                    }
-                case "arcsin":{
-
-
                         break;
                     }
             
-        }
-
-            return 0;
-
-        }
-
-        private double inverse_trig(double a, string op)
-        {
-            switch (op) {
-                case "arcsin":
-                    {
-                        break;
-                    }
-
             }
             return -1;
+
         }
 
         private double hyper_trig(double a, string op)
@@ -510,24 +510,6 @@ namespace WpfApp1
             }
             else
             {
-                {
-                    //for non-integer(newtons method) 
-                    /*
-
-                     if 2^1/2 
-                        let f(x) = x^(1/y)
-                            f(z) = z^(y) - x;
-                            f'(z) = y*z^(y-1);
-
-                        zn = z - (z^(y)-x)/(y*z^(y-1))
-                                   (z^(y-y+1)/y - x/(y*z^(y-1))
-                                    (z - x/(z^(y-1))/y
-
-                        zn = (z(1-y) + x/(z^(y-1)))/y
-
-                     */
-                }
-
                 /*
                  x^(1/n) = z
                 log(z) = log(x)/n
@@ -564,7 +546,7 @@ namespace WpfApp1
                 case "sin":
                     {
                         
-                        //MessageBox.Show("@");
+                        
                         val.Push(new_trignometery(val.Pop(), op.Peek()));
                         break;
                     }
@@ -613,13 +595,6 @@ namespace WpfApp1
                         val.Push(logarithmic(val.Pop(), op.Peek()));
                         break;
                     }
-                case "arcsin":
-                    {
-                        
-                        val.Push(inverse_trig(val.Pop(),"arcsin"));
-                        
-                        break;
-                    }
                 case "sinh":
                     {
                         val.Push(hyper_trig(val.Pop(), op.Peek()));
@@ -648,6 +623,21 @@ namespace WpfApp1
                 case "atanh":
                     {
                         val.Push(inv_hyper_trig(val.Pop(), op.Peek()));
+                        break;
+                    }
+                case "atan":
+                    {
+                        val.Push(inverse_trig(val.Pop(), op.Peek()));
+                        break;
+                    }
+                case "asin":
+                    {
+                        val.Push(inverse_trig(val.Pop(), op.Peek()));
+                        break;
+                    }
+                case "acos":
+                    {
+                        val.Push(inverse_trig(val.Pop(), op.Peek()));
                         break;
                     }
                 default:
@@ -705,7 +695,8 @@ namespace WpfApp1
 
         private static readonly Dictionary<string, int> pre = new Dictionary<string, int>() {
         { "+", 1 }, { "-", 1 }, { "*", 2 }, { "/", 2 }, { "^", 3 },
-        { "sin", 4 }, { "cos", 4 }, { "tan", 4 }, 
+        { "sin", 4 }, { "cos", 4 }, { "tan", 4 },
+            {"atan",4},{"asin",4},{"acos",4},
             { "ln", 4 }, { "log", 4 },
             {"sinh",4},{"cosh",4},{"tanh",4},
             {"asinh",4 },{"acosh",4},{"atanh",4}
